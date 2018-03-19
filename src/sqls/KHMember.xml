@@ -10,12 +10,13 @@
 			VALUES(#{id}, #{pwd}, #{name}, #{email}, 3)
 	</insert>
 	
-	<select id="login" parameterType="kh.com.a.model.MemberDto"
-		resultType="kh.com.a.model.MemberDto">
+	<select id="login" parameterType="kh.com.a.model.MemberDto" resultType="kh.com.a.model.MemberDto">
 		SELECT ID, NAME, EMAIL, AUTH
 		FROM MEMBER
 		WHERE ID=#{id} AND PWD=#{pwd}
 	</select>
 
-
+	<select id="getID" parameterType="kh.com.a.model.MemberDto" resultType="int">
+		SELECT NVL(COUNT(*), 0) FROM MEMBER WHERE ID = #{id}
+	</select>
 </mapper>  

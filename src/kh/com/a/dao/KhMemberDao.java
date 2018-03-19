@@ -7,4 +7,6 @@ public interface KhMemberDao {
 	boolean addmember(MemberDto mem)throws Exception;
 	
 	MemberDto login(MemberDto mem)throws Exception;
+
+	int getID(MemberDto mem);
 }

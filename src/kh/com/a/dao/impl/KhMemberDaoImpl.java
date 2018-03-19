@@ -25,6 +25,11 @@ public class KhMemberDaoImpl implements KhMemberDao {
 	public MemberDto login(MemberDto mem) throws Exception {
 		return sqlSession.selectOne(namespace + "login", mem);
 	}
+
+	@Override
+	public int getID(MemberDto mem) {
+		return sqlSession.selectOne(namespace + "getID", mem);
+	}
 	
 	
 

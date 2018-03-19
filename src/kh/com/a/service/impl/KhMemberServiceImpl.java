@@ -22,6 +22,11 @@ public class KhMemberServiceImpl implements KhMemberService {
 	public MemberDto login(MemberDto mem) throws Exception {		
 		return khMemberDao.login(mem);		
 	}
+
+	@Override
+	public int getID(MemberDto mem) throws Exception {
+		return khMemberDao.getID(mem);
+	}
 	
 	
 }

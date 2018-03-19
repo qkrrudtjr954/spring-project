@@ -17,4 +17,12 @@
 	<put-attribute name="main" value="/WEB-INF/views/bbs/bbslist.jsp"/>
 	<put-attribute name="bottom_inc" value="/WEB-INF/views/common/bottom.jsp"/>
 </definition>
+
+<definition name="bbswrite.tiles" extends="bbslist.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/bbswrite.jsp"/>
+</definition>
+
+<definition name="bbsdetail.tiles" extends="bbslist.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/bbsdetail.jsp"/>
+</definition>
 </tiles-definitions>

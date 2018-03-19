@@ -31,35 +31,33 @@ public class KhBbsController {
 		
 		return "bbslist.tiles";
 	}
-	/*
+	
 	@RequestMapping(value = "bbswrite.do", method = {RequestMethod.GET,	RequestMethod.POST})
 	public String bbswrite(Model model) {
 		logger.info("KhBbsController bbswrite "+ new Date());
-		return "bbswrite";
+		return "bbswrite.tiles";
 	}
 	
-	@RequestMapping(value = "bbswriteAf.do", 
-			method = RequestMethod.POST)
+	@RequestMapping(value = "bbswriteAf.do", method = RequestMethod.POST)
 	public String bbswriteAf(BbsDto bbs, Model model) throws Exception {
 		if(bbs.getContent().equals("") || bbs.getTitle().equals("")){
-			return "bbswrite";
+			return "bbswrite.tiles";
 		}
 		logger.info("Welcome KhBbsController bbswriteAf! "+ new Date());
+		
 		khBbsService.writeBbs(bbs);
 		return "redirect:/bbslist.do";
 	}
 	
-	@RequestMapping(value = "bbsdetail.do", 
-			method = {RequestMethod.GET,
-			RequestMethod.POST})
+	@RequestMapping(value = "bbsdetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String bbsdetail(int seq,Model model) throws Exception {
 		logger.info("Welcome KhBbsController bbsdetail! "+ new Date());
 		BbsDto bbs=null;		
 		bbs=khBbsService.getBbs(seq);
 		model.addAttribute("bbs", bbs);
-		return "bbsdetail";
+		return "bbsdetail.tiles";
 	}
-
+	/*
 	@RequestMapping(value = "answer.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String answer(int seq, Model model) throws Exception {
 		logger.info("Welcome KhBbsController answer! "+ new Date());

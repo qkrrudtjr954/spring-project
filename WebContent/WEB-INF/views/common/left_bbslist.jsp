@@ -34,6 +34,6 @@
 	}
 	
 	function url_bbswrite() {
-		location.href = 'bbslist.do';
+		location.href = 'bbswrite.do';
 	}
 </script>

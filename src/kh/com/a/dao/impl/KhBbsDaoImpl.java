@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kh.com.a.dao.KhBbsDao;
 import kh.com.a.model.BbsDto;
+import kh.com.a.model.BbsParam;
 
 @Repository
 public class KhBbsDaoImpl implements KhBbsDao {
@@ -56,6 +57,21 @@ public class KhBbsDaoImpl implements KhBbsDao {
 	@Override
 	public void deleteBbs(int seq) throws Exception {
 		sqlSession.update(ns+"deleteBbs", seq);
+	}
+
+	@Override
+	public List<BbsDto> getBbsPagingList(BbsParam param) throws Exception {
+		List<BbsDto> list = new ArrayList<>();
+		
+		list = sqlSession.selectList(ns+"getBbsPagingList", param);
+		return list;
+	}
+
+	@Override
+	public int getBbsCount(BbsParam param) throws Exception {
+		int num = 0;
+		num = sqlSession.selectOne(ns+"getBbsCount", param);
+		return num;
 	}
 
 	

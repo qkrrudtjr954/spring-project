@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kh.com.a.model.BbsDto;
+import kh.com.a.model.BbsParam;
 import kh.com.a.service.KhBbsService;
 
 @Controller
@@ -23,11 +24,31 @@ public class KhBbsController {
 	KhBbsService khBbsService;
 	
 	@RequestMapping(value="bbslist.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String bbslist(Model model) throws Exception{
-		logger.info("KhBbsController bbslist");		
+	public String bbslist(Model model, BbsParam param) throws Exception{
+		logger.info("KhBbsController bbslist param : {}", param);		
+
+		model.addAttribute("doc_title", "BBS 글 목록");
 		
-		List<BbsDto> list = khBbsService.getBbsList();
+		int sn = param.getPageNumber();
+		int start = (sn)*param.getRecordCountPerPage()+1;
+		int end = (sn+1)*param.getRecordCountPerPage();
+		
+		param.setStart(start);
+		param.setEnd(end);
+		
+		int totalRecordCount = khBbsService.getBbsCount(param);		
+		
+		List<BbsDto> list = khBbsService.getBbsPagingList(param);
 		model.addAttribute("bbslist", list);
+		
+		model.addAttribute("pageNumber", sn);
+		model.addAttribute("pageCountPerScreen", 10);
+		model.addAttribute("recordCountPerPage", param.getRecordCountPerPage());
+		model.addAttribute("totalRecordCount", totalRecordCount);
+		
+		model.addAttribute("s_category", param.getS_category());
+		model.addAttribute("s_keyword", param.getS_keyword());
+		
 		
 		return "bbslist.tiles";
 	}

@@ -76,7 +76,6 @@
 	</jsp:include>
 </div>
 
-
 <div id="buttons_wrap">
 	<span class="button blue">
 	<button type="button" id="_btnAdd">글쓰기</button></span>

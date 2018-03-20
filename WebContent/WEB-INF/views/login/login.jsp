@@ -208,7 +208,7 @@ $("#_pwd").keypress(function() {
 var user_id = $.cookie("user_id");
 if(user_id != null){
 	$("#_userid").val(user_id);
-	$("#_chk_save_id").prop("checked", true);
+	$("#_chk_save_id").attr("checked", true);
 }
 
 $("#_chk_save_id").click(function() {		
@@ -220,7 +220,7 @@ $("#_chk_save_id").click(function() {
 			$.cookie("user_id", $("#_userid").val(), { expires: 7, path: '/' });
 		}		
 	}else{
-		$.removeCookie("user_id");
+		$.removeCookie("user_id", {path:'/'});
 	}
 });
 

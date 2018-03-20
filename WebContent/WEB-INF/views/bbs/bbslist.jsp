@@ -83,7 +83,7 @@ $(document).ready(function() {
 });
 $("#_btnAdd").click(function() {	
 	alert('글쓰기');	
-	$("#_frmForm").attr({ "target":"_self", "action":"bbswrite.do" }).submit();
+	location.href= "bbswrite.do";
 });
 $("#_btnSearch").click(function() {
 	//alert('search');						

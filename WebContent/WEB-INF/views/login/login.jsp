@@ -221,6 +221,7 @@ $("#_chk_save_id").click(function() {
 		}		
 	}else{
 		$.removeCookie("user_id", {path:'/'});
+		
 	}
 });
 

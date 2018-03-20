@@ -25,4 +25,15 @@
 <definition name="bbsdetail.tiles" extends="bbslist.tiles">
 	<put-attribute name="main" value="/WEB-INF/views/bbs/bbsdetail.jsp"/>
 </definition>
+
+<definition name="bbsreply.tiles" extends="bbslist.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/bbs/bbsreply.jsp"/>
+</definition>
+
+<definition name="calendar.tiles" extends="bbslist.tiles">
+	<put-attribute name="main" value="/WEB-INF/views/calendar/calendar.jsp"/>
+	<put-attribute name="left_main" value="/WEB-INF/views/common/left_calendarlist.jsp"/>
+</definition>
+
+
 </tiles-definitions>

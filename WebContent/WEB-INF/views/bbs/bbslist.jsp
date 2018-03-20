@@ -13,9 +13,9 @@
 	<td>검색 : </td>
 	<td style="padding-left:5px;">
 		<select id="_s_category" name="s_category">
-			<option value="" selected="selected">선택</option>
-			<option value="title">제목</option>
-			<option value="contents">내용</option>								
+			<option id="default" value="">선택</option>
+			<option id="title" value="title">제목</option>
+			<option id="contents" value="contents">내용</option>								
 		</select>
 	</td>
 	<td style="padding-left:5px;"><input type="text" id="_s_keyword" name="s_keyword" value="${s_keyword}"/></td>
@@ -90,6 +90,8 @@ $(document).ready(function() {
 	}).mouseout(function() {
 		$(this).children().css("background-color","#FFFFFF");
 	});				
+	
+	$('#${s_category}').attr('selected', 'selected');
 });
 $("#_btnAdd").click(function() {	
 	alert('글쓰기');	

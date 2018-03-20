@@ -44,9 +44,8 @@ public class KhBbsDaoImpl implements KhBbsDao {
 	}
 
 	@Override
-	public boolean replyBbsInsert(BbsDto bbs) throws Exception {
-		sqlSession.insert(ns+"replyBbsInsert", bbs);
-		return true;
+	public int replyBbsInsert(BbsDto bbs) throws Exception {
+		return sqlSession.insert(ns+"replyBbsInsert", bbs);
 	}
 
 	@Override
@@ -72,6 +71,11 @@ public class KhBbsDaoImpl implements KhBbsDao {
 		int num = 0;
 		num = sqlSession.selectOne(ns+"getBbsCount", param);
 		return num;
+	}
+
+	@Override
+	public int updateBbs(BbsDto bbs) throws Exception {
+		return sqlSession.update(ns+"updateBbs", bbs); 
 	}
 
 	

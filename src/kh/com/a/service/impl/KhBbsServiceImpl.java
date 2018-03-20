@@ -29,9 +29,9 @@ public class KhBbsServiceImpl implements KhBbsService {
 	}
 
 	@Override
-	public void reply(BbsDto bbs) throws Exception {
+	public int reply(BbsDto bbs) throws Exception {
 		khBbsDao.replyBbsUpdate(bbs);
-		khBbsDao.replyBbsInsert(bbs);	
+		return khBbsDao.replyBbsInsert(bbs);	
 	}
 
 	@Override
@@ -53,6 +53,11 @@ public class KhBbsServiceImpl implements KhBbsService {
 	@Override
 	public int getBbsCount(BbsParam param) throws Exception {
 		return khBbsDao.getBbsCount(param);
+	}
+
+	@Override
+	public int updateBbs(BbsDto bbs) throws Exception {
+		return khBbsDao.updateBbs(bbs);
 	}
 	
 	

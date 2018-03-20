@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kh.com.a.model.BbsDto;
 import kh.com.a.model.BbsParam;
@@ -71,28 +72,12 @@ public class KhBbsController {
 	}
 	
 	@RequestMapping(value = "bbsdetail.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String bbsdetail(int seq,Model model) throws Exception {
+	public String bbsdetail(int seq, Model model) throws Exception {
 		logger.info("Welcome KhBbsController bbsdetail! "+ new Date());
 		BbsDto bbs=null;		
 		bbs=khBbsService.getBbs(seq);
 		model.addAttribute("bbs", bbs);
 		return "bbsdetail.tiles";
-	}
-	/*
-	@RequestMapping(value = "answer.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String answer(int seq, Model model) throws Exception {
-		logger.info("Welcome KhBbsController answer! "+ new Date());
-		BbsDto bbs=null;		
-		bbs=khBbsService.getBbs(seq);
-		model.addAttribute("bbs", bbs);
-		return "answer";
-	}
-	
-	@RequestMapping(value = "answerAf.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String answerAf(BbsDto bbs, Model model) throws Exception {
-		logger.info("Welcome KhBbsController answer! "+ new Date());
-		khBbsService.reply(bbs);		
-		return "redirect:/bbslist.do";
 	}
 	
 	@RequestMapping(value = "bbsdelete.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -103,13 +88,32 @@ public class KhBbsController {
 	}
 	
 	@RequestMapping(value = "bbsupdate.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String bbsupdate(int seq, Model model) throws Exception{
-		logger.info("Welcome KhBbsController bbsupdate! "+ new Date());
+	public String bbsupdate(BbsDto bbs, Model model, RedirectAttributes redirectAttributes) throws Exception{
+		logger.info("Welcome KhBbsController bbsupdate!{} , {} ", new Date(), bbs);
 		
-		BbsDto bbs=khBbsService.getBbs(seq);		
-		model.addAttribute("bbs", bbs);		
-		return "bbsupdate";
-	}*/
+		khBbsService.updateBbs(bbs);
+		
+		redirectAttributes.addAttribute("seq", bbs.getSeq());		
+		return "redirect:bbsdetail.do";
+	}
+	
+	@RequestMapping(value = "bbsreply.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String answer(int seq, Model model) throws Exception {
+		logger.info("Welcome KhBbsController bbsreply! {} ", new Date());
+		BbsDto bbs=khBbsService.getBbs(seq);
+		model.addAttribute("bbs", bbs);
+		
+		return "bbsreply.tiles";
+	}
+	
+	@RequestMapping(value = "bbsreplyAf.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String answerAf(BbsDto bbs, Model model, RedirectAttributes redirectAttributes) throws Exception {
+		logger.info("Welcome KhBbsController bbsreplyAf! {} ", new Date());
+		int seq = khBbsService.reply(bbs);	
+		redirectAttributes.addAttribute("seq", seq);
+		
+		return "redirect:/bbsdetail.do";
+	}
 	 
 }
 

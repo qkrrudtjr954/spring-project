@@ -1,6 +1,7 @@
 package kh.com.a.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,16 @@ public class KhMemberController {
 	public String regi(Model model) {
 		logger.info("KhMemberController regi");		
 		return "regi.tiles";
+	}
+	
+	@RequestMapping(value="logout.do", method=RequestMethod.GET)
+	public String logout(Model model, HttpServletRequest req) {
+		logger.info("KhMemberController regi");
+		
+		HttpSession session = req.getSession();
+		session.invalidate();
+		
+		return "redirect:login.do";
 	}
 	
 	

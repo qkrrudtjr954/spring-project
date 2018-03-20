@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kh.com.a.dao.KhBbsDao;
 import kh.com.a.model.BbsDto;
+import kh.com.a.model.BbsParam;
 import kh.com.a.service.KhBbsService;
 
 @Service
@@ -42,7 +43,17 @@ public class KhBbsServiceImpl implements KhBbsService {
 	@Override
 	public void deleteBbs(int seq) throws Exception {
 		khBbsDao.deleteBbs(seq);		
-	}	
+	}
+
+	@Override
+	public List<BbsDto> getBbsPagingList(BbsParam param) throws Exception {
+		return khBbsDao.getBbsPagingList(param);
+	}
+
+	@Override
+	public int getBbsCount(BbsParam param) throws Exception {
+		return khBbsDao.getBbsCount(param);
+	}
 	
 	
 }

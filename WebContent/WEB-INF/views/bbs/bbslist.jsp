@@ -66,6 +66,17 @@
 
 </table>
 
+
+<div id="paging_wrap">
+	<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
+		<jsp:param value="${pageNumber }" name="pageNumber"/>
+		<jsp:param value="${pageCountPerScreen }" name="pageCountPerScreen"/>
+		<jsp:param value="${recordCountPerPage }" name="recordCountPerPage"/>
+		<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
+	</jsp:include>
+</div>
+
+
 <div id="buttons_wrap">
 	<span class="button blue">
 	<button type="button" id="_btnAdd">글쓰기</button></span>

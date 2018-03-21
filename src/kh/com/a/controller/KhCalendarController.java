@@ -17,6 +17,7 @@ import kh.com.a.model.CalendarDto;
 import kh.com.a.model.MemberDto;
 import kh.com.a.model.myCal;
 import kh.com.a.service.KhCalendarService;
+import kh.com.a.util.CalendarUtil;
 
 @Controller
 public class KhCalendarController {
@@ -35,12 +36,14 @@ public class KhCalendarController {
 		jcal.calculate(); // 현재 시간 설정 및 취득
 		
 		String id = ((MemberDto)req.getSession().getAttribute("login")).getId();
-		String smonth = "";
+		/*String smonth = "";
 		if((jcal.getMonth() + "").length() < 2) {	// 1 -> 01 로 만들어 주기 위해서
 			smonth = "0" + (jcal.getMonth() + "");
-		}		
+		}
 		String yyyymm = jcal.getYear() + smonth;
+		*/
 		
+		String yyyymm = CalendarUtil.yyyymm(jcal.getYear(), jcal.getMonth());
 		CalendarDto fcal = new CalendarDto();
 		fcal.setId(id);
 		fcal.setRdate(yyyymm);

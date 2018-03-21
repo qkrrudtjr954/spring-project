@@ -14,6 +14,9 @@
 			<li>
 				<a href="bbslist.do" title="답변형 게시판">답변형 게시판</a>
 			</li>
+			<li>
+				<a href="calendar.do" title="달력 보기">달력 보기</a>
+			</li>
 		</ul>
 	</div>
 </div>

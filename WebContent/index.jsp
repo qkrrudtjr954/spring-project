@@ -8,9 +8,8 @@
 <body>
 
 <%
-//response.sendRedirect("./login.do"); 
-response.sendRedirect("./calendar.do");
-
+response.sendRedirect("./login.do"); 
+//response.sendRedirect("./calendar.do");
 %>
 
 </body>

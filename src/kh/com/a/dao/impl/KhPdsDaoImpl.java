@@ -22,7 +22,12 @@ public class KhPdsDaoImpl implements KhPdsDao {
 	
 	@Override
 	public List<PdsDto> getPdsList() {
-		return sqlSession.selectList(ns+"getBbsList");
+		return sqlSession.selectList(ns+"getPbsList");
+	}
+
+	@Override
+	public void uploadPds(PdsDto dto) {
+		sqlSession.insert(ns+"uploadPds", dto);
 	}
 	
 }

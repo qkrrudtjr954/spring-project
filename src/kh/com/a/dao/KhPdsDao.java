@@ -6,4 +6,5 @@ import kh.com.a.model.PdsDto;
 
 public interface KhPdsDao {
 	public List<PdsDto> getPdsList();
+	public void uploadPds(PdsDto dto);
 }

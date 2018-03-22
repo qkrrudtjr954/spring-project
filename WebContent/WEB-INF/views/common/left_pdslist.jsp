@@ -12,12 +12,18 @@
 		<li class="menu_item">
 			<a href="#none" onclick="url_pdslist()" title="자료 목록">자료 목록</a>
 		</li>
+		<li class="menu_item">
+			<a href="#none" onclick="url_pdswrite()" title="자료 등록">자료 등록</a>
+		</li>
 	</ul>
 </div>
 
 <script>
 function url_pdslist() {
 	location.href = "pdslist.do";
+}
+function url_pdswrite() {
+	location.href = "pdswrite.do";
 }
 </script>
 

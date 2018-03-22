@@ -21,4 +21,9 @@ public class KhPdsServiceImpl implements KhPdsService{
 		return pdsDao.getPdsList();
 	}
 
+	@Override
+	public void uploadPds(PdsDto dto) {
+		pdsDao.uploadPds(dto);
+	}
+
 }

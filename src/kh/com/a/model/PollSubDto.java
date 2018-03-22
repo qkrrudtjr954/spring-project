@@ -2,6 +2,22 @@ package kh.com.a.model;
 
 import java.io.Serializable;
 
+
+
+
+/*
+create table pollsub(
+    pollsubid number not null,
+    pollid number not null,
+    answer varchar2(1000) not null,
+    account number not null,
+    constraint pollsub_pk primary key(pollsubid)
+);
+
+create sequence pollsub_seq start with 1 increment by 1;
+
+alter table pollsub add constraint pollsub_fk foreign key(pollid) references poll(pollid);
+*/
 public class PollSubDto implements Serializable {
 	private int pollsubid;
 	private int pollid;	//	투표 번호

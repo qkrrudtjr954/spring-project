@@ -14,6 +14,14 @@
 			<li><a href="calendar.do" title="일정관리">일정관리</a></li>
 			<li><a href="calendar2.do" title="일정관리">Ajax일정관리</a></li>
 			<li><a href="pdslist.do" title="자료실">자료실</a></li>			
+			<li><a href="pollist.do" title="투표하기">투표하기</a></li>
+			
+			<c:if test="${login.auth eq '1' }">
+				<li>
+					<a href="pollmake.do" title="투표 만들기">투표 만들기</a>
+				</li>
+			</c:if>			
+						
 		</ul>	
 	</div>
 </div>

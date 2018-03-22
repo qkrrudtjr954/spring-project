@@ -24,9 +24,11 @@ public class KhMemberServiceImpl implements KhMemberService {
 	}
 
 	@Override
-	public int getID(MemberDto mem) throws Exception {
-		return khMemberDao.getID(mem);
+	public int getID(MemberDto mem) {		
+		return khMemberDao.getID(mem);		
 	}
+	
+	
 	
 	
 }

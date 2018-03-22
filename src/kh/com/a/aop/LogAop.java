@@ -7,6 +7,8 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class LogAop {
 
+//	@Around("within(kh.com.a.dao.impl.*)")
+//	@Around("within(kh.com.a.dao.impl.*)")
 	@Around("within(kh.com.a.dao.impl.*)")
 	public Object loggerApp(ProceedingJoinPoint jp)throws Throwable {
 		

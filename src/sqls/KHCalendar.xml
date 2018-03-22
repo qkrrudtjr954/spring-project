@@ -17,6 +17,38 @@
         WHERE ID=#{id} AND SUBSTR(RDATE,1,6) = #{rdate} ) 
         WHERE RN BETWEEN 1 AND 5
 	</select>
+	
+	<select id="getDayList"
+	parameterType="kh.com.a.model.CalendarDto"
+	resultType="kh.com.a.model.CalendarDto">
+	SELECT SEQ,ID, TITLE, CONTENT, 
+		SUBSTR(RDATE,1,4)||'년 '||SUBSTR(RDATE,5,2)||'월 '||SUBSTR(RDATE,7,2)||'일 '
+		||SUBSTR(RDATE,9,2)||'시 '||SUBSTR(RDATE,11,2)||'분 ' RDATE
+		,WDATE
+	FROM CALENDAR 
+	WHERE ID=#{id} AND  SUBSTR(RDATE,1,8)=#{rdate}
+		order by WDATE asc
+	</select>
+	
+	<insert id="writeCalendar"
+	parameterType="kh.com.a.model.CalendarDto">
+		INSERT INTO CALENDAR
+		(SEQ,ID, TITLE, CONTENT, RDATE, WDATE)
+		VALUES(SEQ_CAL.NEXTVAL,
+		#{id},#{title},#{content},#{rdate},SYSDATE)
+	</insert>
+	
+	<select id="getDay"
+	parameterType="kh.com.a.model.CalendarDto"
+	resultType="kh.com.a.model.CalendarDto">
+	SELECT SEQ,ID, TITLE, CONTENT, RDATE, WDATE
+		FROM CALENDAR 
+	WHERE SEQ=#{seq} 
+	</select>
 
+	<delete id="delCal" parameterType="java.lang.Integer">
+	DELETE FROM CALENDAR
+		WHERE SEQ=#{seq}
+</delete>
 
 </mapper>

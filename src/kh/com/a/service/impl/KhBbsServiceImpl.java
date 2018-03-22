@@ -27,12 +27,7 @@ public class KhBbsServiceImpl implements KhBbsService {
 	public boolean writeBbs(BbsDto bbs) throws Exception {		
 		return khBbsDao.writeBbs(bbs);		
 	}
-
-	@Override
-	public int reply(BbsDto bbs) throws Exception {
-		khBbsDao.replyBbsUpdate(bbs);
-		return khBbsDao.replyBbsInsert(bbs);	
-	}
+	
 
 	@Override
 	@Transactional(readOnly=true)
@@ -41,24 +36,36 @@ public class KhBbsServiceImpl implements KhBbsService {
 	}
 
 	@Override
-	public void deleteBbs(int seq) throws Exception {
-		khBbsDao.deleteBbs(seq);		
+	public boolean readCount(int seq) throws Exception {
+		// TODO Auto-generated method stub
+		return khBbsDao.readCount(seq);		
 	}
 
 	@Override
 	public List<BbsDto> getBbsPagingList(BbsParam param) throws Exception {
-		return khBbsDao.getBbsPagingList(param);
+		// TODO Auto-generated method stub
+		return khBbsDao.getBbsPagingList(param);		
 	}
 
 	@Override
 	public int getBbsCount(BbsParam param) throws Exception {
-		return khBbsDao.getBbsCount(param);
+		return khBbsDao.getBbsCount(param);		
 	}
 
 	@Override
-	public int updateBbs(BbsDto bbs) throws Exception {
-		return khBbsDao.updateBbs(bbs);
+	public void reply(BbsDto bbs) throws Exception {
+		khBbsDao.replyBbsUpdate(bbs);
+		khBbsDao.replyBbsInsert(bbs);
 	}
+
+	@Override
+	public void updateBbs(BbsDto bbs) throws Exception {
+		khBbsDao.updateBbs(bbs);		
+	}
+
+	
+
+	
 	
 	
 }

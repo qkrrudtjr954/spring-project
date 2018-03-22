@@ -2,7 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
- 
+
+<!-- 검색 카테고리를 유지 -->
+<%
+String category = (String)request.getAttribute("s_category");
+if(category == null) category = "";
+%>
+
+<script type="text/javascript">
+var str='<%=category %>';
+$(document).ready(function(){	
+	document.frmForm1.s_category.value = str;
+}); 
+</script> 
+
+
+
 
 <div class="box_border" style="margin-top:5px; margin-bottom: 10px;">
 
@@ -13,15 +28,16 @@
 	<td>검색 : </td>
 	<td style="padding-left:5px;">
 		<select id="_s_category" name="s_category">
-			<option id="default" value="">선택</option>
-			<option id="title" value="title">제목</option>
-			<option id="contents" value="contents">내용</option>								
+			<option value="" selected="selected">선택</option>
+			<option value="title">제목</option>
+			<option value="contents">내용</option>								
 		</select>
 	</td>
 	<td style="padding-left:5px;"><input type="text" id="_s_keyword" name="s_keyword" value="${s_keyword}"/></td>
 	<td style="padding-left:5px;"><span class="button blue"><button type="button" id="_btnSearch"> 검색 </button></span></td>
 </tr>
 </table>
+
 <input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber}"/>						
 <input type="hidden" name="recordCountPerPage" id="_recordCountPerPage" value="${(empty recordCountPerPage)?10:recordCountPerPage}"/>						
 
@@ -67,22 +83,30 @@
 </table>
 
 
+
+<!-- 페이징 처리 -->
+
 <div id="paging_wrap">
-	<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
-		<jsp:param value="${pageNumber }" name="pageNumber"/>
-		<jsp:param value="${pageCountPerScreen }" name="pageCountPerScreen"/>
-		<jsp:param value="${recordCountPerPage }" name="recordCountPerPage"/>
-		<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
-	</jsp:include>
+<jsp:include page="/WEB-INF/views/common/paging.jsp" flush="false">
+	<jsp:param value="${pageNumber }" name="pageNumber"/>
+	<jsp:param value="${pageCountPerScreen }" name="pageCountPerScreen"/>
+	<jsp:param value="${recordCountPerPage }" name="recordCountPerPage"/>
+	<jsp:param value="${totalRecordCount }" name="totalRecordCount"/>
+</jsp:include>
 </div>
+
+<!-- 페이징 처리 -->
+
+<form name="frmForm2" id="_frmForm" method="get" action="bbswrite.do">
+</form>
 
 <div id="buttons_wrap">
 	<span class="button blue">
 	<button type="button" id="_btnAdd">글쓰기</button></span>
 </div>
-
+<!-- 
 <a href='bbswrite.do'>글쓰기</a> 
-
+ -->
 <script type="text/javascript">
 $(document).ready(function() {
 	$("._hover_tr").mouseover(function() {
@@ -90,12 +114,10 @@ $(document).ready(function() {
 	}).mouseout(function() {
 		$(this).children().css("background-color","#FFFFFF");
 	});				
-	
-	$('#${s_category}').attr('selected', 'selected');
 });
 $("#_btnAdd").click(function() {	
 	alert('글쓰기');	
-	location.href= "bbswrite.do";
+	$("#_frmForm").attr({ "target":"_self", "action":"bbswrite.do" }).submit();	
 });
 $("#_btnSearch").click(function() {
 	//alert('search');						

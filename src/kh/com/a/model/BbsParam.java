@@ -3,6 +3,7 @@ package kh.com.a.model;
 import java.io.Serializable;
 
 public class BbsParam implements Serializable {
+
 	private int seq;
 	private String id;
 		
@@ -18,16 +19,19 @@ public class BbsParam implements Serializable {
 	private int del;
 	private int readcount;
 	
-	// search 
+	// search
 	private String s_category;
 	private String s_keyword;
 	
 	// paging
-	private int recordCountPerPage = 10;
-	private int pageNumber = 0;
+	private int recordCountPerPage=10;
+	private int pageNumber=0;
 	
-	private int start = 1;
-	private int end = 10;
+	private int start=1;
+	private int end=10;
+	
+	
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -140,4 +144,11 @@ public class BbsParam implements Serializable {
 	}
 	
 	
+	
 }
+
+
+
+
+
+

@@ -11,13 +11,12 @@
 	<context:annotation-config/>
 	
 	<!-- veiw는 다 여기 있어! -->
-	<!-- 타일즈를 사용하면서 주석처리를 한다. -->
 	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>		
 	</bean> -->
 	
-	<!-- 타일즈 설정 -->
+	<!-- tiles 설정 -->
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
 			<list>
@@ -28,9 +27,10 @@
 	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="requestContextAttribute" value="requestContext"/>
-		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>	
 	</bean>
-
+	<!-- tiles 설정 -->
+	
 	<context:component-scan base-package="kh.com.a"/>
 
 	<!-- 주석문의 사용 허가 -->
@@ -38,22 +38,6 @@
 	
 	<!-- spring에서 처리할 수 없는 요청은 tomcat에 위임 -->
 	<mvc:default-servlet-handler/>
-
-
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**/*.do" />
-			<mvc:exclude-mapping path="/bbslist.do" />
-			<mvc:exclude-mapping path="/logout.do" />
-			<mvc:exclude-mapping path="/login.do" />
-			<mvc:exclude-mapping path="/loginAf.do" />
-			<mvc:exclude-mapping path="/regi.do" />
-			<mvc:exclude-mapping path="/regiAf.do" />
-			<mvc:exclude-mapping path="/getID.do" />
-			<bean class="kh.com.a.aop.LoginCheckInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
-
 
 </beans>
 

@@ -1,39 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<fmt:requestEncoding value="utf-8"/>
+<fmt:requestEncoding value="utf-8"/>   
 
 <div class="menu_table">
-	<ul style="width:100%;">
-		<li class="title">
-			답변형 게시판
-		</li>
-		<li class="subtitle">
-			답변형 게시판
+	<ul style="width: 100%;">	
+		<li class="title">답변형게시판</li>
+		<li class="subtitle">답변형게시판</li>	
+		<li class="menu_item">
+			<a href="#none" onclick="url_bbslist()" title="글목록">글목록</a>
 		</li>
 		<li class="menu_item">
-			<a href="#none" onclick="url_bbslist()">글목록</a>
+			<a href="#none" onclick="url_bbswrite()" title="글쓰기">글쓰기</a>
 		</li>
-		<li class="menu_item">
-			<a href="#none" onclick="url_bbswrite()">글쓰기</a>
-		</li>
+	
 	</ul>
 </div>
 
-<script type="text/javascript">
-	function url_logout() {
-		if(confirm('Are u sure?')){
-			location.href = 'logout.do';			
-		}
-	}
+<script>
 
-	function url_bbslist() {
-		location.href = 'bbslist.do';
-	}
-	
-	function url_bbswrite() {
-		location.href = 'bbswrite.do';
-	}
+function url_bbslist() {
+	alert("글 목록입니다");
+	location.href = "bbslist.do";
+}
+function url_bbswrite() {
+	alert("글 쓰기입니다");
+	location.href = "bbswrite.do";
+}
 </script>
+
+
+
+

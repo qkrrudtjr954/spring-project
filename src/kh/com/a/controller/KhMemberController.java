@@ -1,7 +1,8 @@
 package kh.com.a.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,64 +30,44 @@ public class KhMemberController {
 		return "login.tiles";
 	}
 	
+	
 	@RequestMapping(value="regi.do", method=RequestMethod.GET)
 	public String regi(Model model) {
-		logger.info("KhMemberController regi");		
+		logger.info("KhMemberController regi");				
 		return "regi.tiles";
 	}
 	
-	@RequestMapping(value="logout.do", method=RequestMethod.GET)
-	public String logout(Model model, HttpServletRequest req) {
-		logger.info("KhMemberController regi");
-		
-		HttpSession session = req.getSession();
-		session.invalidate();
-		
-		return "redirect:login.do";
-	}
-	
-	
 	@ResponseBody
 	@RequestMapping(value="getID.do", method=RequestMethod.POST)
-	public YesMember getId(Model model, MemberDto mem) {
-		logger.info("KhMemberController getid");
+	public YesMember getID(Model model, MemberDto mem) {
+		logger.info("KhMemberController getID");	
 		
-		YesMember yesMember = new YesMember();
-		try {
-			
-			int count = khMemberService.getID(mem);
-			
-			if(count > 0) {
-				yesMember.setMessage("success");				
-			}else {
-				yesMember.setMessage("fail");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int count = khMemberService.getID(mem);
+		
+		YesMember yes = new YesMember();
+		if(count > 0) {
+			yes.setMessage("SUCS");
+		}else {
+			yes.setMessage("FAIL");
 		}
-		
-		// json으로 자동 파싱된다.
-		return yesMember;
+		return yes;		
 	}
 	
 	
 	
-	
-	
-	@RequestMapping(value="regiAf.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="regiAf.do", 
+			method= {RequestMethod.GET, RequestMethod.POST})
 	public String regiAf(MemberDto mem, Model model)throws Exception{
 		logger.info("KhMemberController regiAf");	
 		
-		khMemberService.addmember(mem);
-		
+		khMemberService.addmember(mem);		
 		return "login.tiles";		
 	}	
 	
-	@RequestMapping(value="loginAf.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="loginAf.do", 
+			method= {RequestMethod.GET, RequestMethod.POST})
 	public String loginAf(HttpServletRequest req, MemberDto mem, Model model)throws Exception{
-		logger.info("KhMemberController loginAf member : {}", mem);
-		
+		logger.info("KhMemberController loginAf");
 		
 		MemberDto login = null;
 		login = khMemberService.login(mem);
@@ -98,6 +79,15 @@ public class KhMemberController {
 			return "redirect:/login.do";
 		}		
 	}
+	
+	@RequestMapping(value="logout.do", 
+			method=RequestMethod.GET)
+	public String logout(HttpServletRequest req, Model model)throws Exception{
+		logger.info("Welcome logout");		
+		req.getSession().invalidate();			
+		return "login.tiles";		
+	}
+	
 	
 }
 

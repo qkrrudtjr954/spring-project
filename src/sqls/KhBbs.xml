@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="KHBbs">
 
@@ -12,7 +10,7 @@
 		FROM BBS
 		ORDER BY REF DESC, STEP ASC	
 	</select>
-
+ 
 	<insert id="writeBbs" parameterType="kh.com.a.model.BbsDto">
 		INSERT INTO BBS
 		(SEQ,ID,REF,STEP,DEPTH,TITLE,CONTENT,WDATE,PARENT,DEL,READCOUNT) 
@@ -20,59 +18,28 @@
 		(SELECT NVL(MAX(REF),0)+1 FROM BBS)
 		,0,0,#{title},#{content},SYSDATE,0,0,0)
 	</insert>
-	
-	<update id="replyBbsUpdate" parameterType="kh.com.a.model.BbsDto">
-		UPDATE BBS 
-		SET STEP=STEP+1
-		WHERE REF=(SELECT REF FROM BBS WHERE SEQ=#{seq})
-			AND STEP>(SELECT STEP FROM BBS WHERE SEQ=#{seq})		
-	</update>
-	
-	<insert id="replyBbsInsert" parameterType="kh.com.a.model.BbsDto">
-		INSERT INTO BBS
-			(SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT, WDATE, PARENT, DEL, READCOUNT)
-		VALUES(SEQ_BBS.NEXTVAL, #{id},
-			(SELECT REF FROM BBS WHERE SEQ=#{seq}),
-			(SELECT STEP FROM BBS WHERE SEQ=#{seq})+1,
-			(SELECT DEPTH FROM BBS WHERE SEQ=#{seq})+1,
-			#{title}, #{content}, SYSDATE, #{seq}, 0, 0)	
-			
-		<selectKey resultType="int" keyProperty="seq" order="AFTER">
-			SELECT SEQ_BBS.CURRVAL FROM DUAL
-	    </selectKey>        
-	</insert>
-	
-	<select id="getBbs" parameterType="java.lang.Integer" resultType="kh.com.a.model.BbsDto">
-		SELECT SEQ, ID, REF, STEP, DEPTH, TITLE, 
-		CONTENT, WDATE, PARENT, DEL, READCOUNT
-		FROM BBS
-		WHERE SEQ=#{seq}
-	</select>
-	
-	<update id="deleteBbs" parameterType="java.lang.Integer">
-		UPDATE BBS
-		SET DEL=1
-		WHERE SEQ=#{seq}
-	</update>	
-
-
-	<select id="getBbsPagingList" parameterType="kh.com.a.model.BbsParam" resultType="kh.com.a.model.BbsDto">
+ 
+	<select id="getBbsPagingList"
+	parameterType="kh.com.a.model.BbsParam"
+	resultType="kh.com.a.model.BbsDto">
 			SELECT SEQ, ID, REF, STEP, DEPTH, TITLE, 
-		CONTENT, WDATE, PARENT, DEL, READCOUNT
-		FROM 
+	CONTENT, WDATE, PARENT, DEL, READCOUNT
+	FROM 
 		( SELECT ROW_NUMBER() OVER (ORDER BY  REF DESC, STEP ASC) as rnum,  
 		SEQ, ID, REF, STEP, DEPTH, TITLE, 
 	    CONTENT, WDATE, PARENT, DEL, READCOUNT FROM BBS
 	    WHERE 1 = 1 
 	    <if test="s_category != '' and s_category != null and s_keyword != '' and s_keyword != null">
 			<if test="s_category == 'title'"> AND TITLE like '%'||#{s_keyword}||'%'</if>	
-			<if test="s_category == 'contents'"> AND CONTENT like '%'||#{s_keyword}||'%'</if>	
+			<if test="s_category == 'contents'"> AND CONTENT like '%'||#{s_keyword}||'%'</if>				
 		</if>
 			 ) A
 			WHERE rnum between ${start} AND ${end}
 	</select>
 	
-	<select id="getBbsCount" parameterType="kh.com.a.model.BbsParam" resultType="java.lang.Integer">
+	<select id="getBbsCount"
+	parameterType="kh.com.a.model.BbsParam"
+	resultType="java.lang.Integer">
 	 
 			SELECT NVL(count(*),0) AS cnt
 			  FROM   BBS  WHERE 1 = 1
@@ -81,11 +48,53 @@
 			<if test="s_category == 'title'"> AND TITLE like '%'||#{s_keyword}||'%'</if>	
 			<if test="s_category == 'contents'"> AND CONTENT like '%'||#{s_keyword}||'%'</if>	
 		</if>
+	</select> 
+	
+	<update id="replyBbsUpdate"
+	parameterType="kh.com.a.model.BbsDto">
+		UPDATE BBS SET
+			STEP=STEP+1
+		WHERE REF=(SELECT REF FROM BBS WHERE SEQ=#{seq})
+			AND STEP>(SELECT STEP FROM BBS WHERE SEQ=#{seq})
+	</update>
+	
+	<insert id="replyBbsInsert"  
+	parameterType="kh.com.a.model.BbsDto">		
+		INSERT INTO BBS
+			(SEQ, ID, REF, STEP, DEPTH, TITLE, CONTENT,
+				WDATE,PARENT, DEL, READCOUNT)
+			VALUES(
+				SEQ_BBS.NEXTVAL,
+				#{id},
+				(SELECT REF FROM BBS WHERE SEQ=#{seq}),
+				(SELECT STEP FROM BBS WHERE SEQ=#{seq})+1,
+				(SELECT DEPTH FROM BBS WHERE SEQ=#{seq})+1,
+				#{title},#{content},SYSDATE,				
+				#{seq}, 0, 0)					
+	</insert>
+	
+	<select id="getBbs"
+	parameterType="java.lang.Integer"
+	resultType="kh.com.a.model.BbsDto">
+		SELECT SEQ, ID, REF, STEP, DEPTH, TITLE, 
+		CONTENT, WDATE, PARENT, DEL, READCOUNT
+		FROM BBS
+		WHERE SEQ=#{seq}
 	</select>
 	
-	<update id="updateBbs" parameterType="kh.com.a.model.BbsDto">
-		UPDATE BBS SET CONTENT = #{content} WHERE SEQ = #{seq}
-	</update>
+	<update id="readCount" 
+	parameterType="java.lang.Integer">
+		UPDATE BBS SET
+		READCOUNT = READCOUNT+1
+		WHERE SEQ=#{seq}
+	</update>	
+	
+	<update id="updateBbs"
+	parameterType="kh.com.a.model.BbsDto">
+		UPDATE BBS SET
+		TITLE=#{title}, CONTENT=#{content}, WDATE=SYSDATE
+		WHERE SEQ=#{seq}
+	</update>		
 
 </mapper>  
 

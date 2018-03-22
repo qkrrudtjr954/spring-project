@@ -17,7 +17,6 @@
 	<th>아이디</th>
 	<td style="text-align: left">${bbs.id}</td>
 </tr>
-
 <tr>
 	<th>제목</th>
 	<td style="text-align: left">
@@ -53,7 +52,8 @@
 
 <tr class="id">
 	<th>아이디</th>
-	<td style="text-align: left"><input type="text" name="id" readonly="readonly" value='${login.id}' size="60"/></td>
+	<td style="text-align: left"><input type="text" name="id" readonly="readonly" 
+	value='${login.id}' size="60"/></td>
 </tr>
 <tr>
 	<th>제목</th>

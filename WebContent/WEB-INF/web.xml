@@ -10,7 +10,6 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  
   <servlet>
   	<servlet-name>dispatchServlet</servlet-name>
   	<servlet-class>
@@ -67,5 +66,6 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+  
   
 </web-app>

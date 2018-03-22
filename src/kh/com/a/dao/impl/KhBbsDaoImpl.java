@@ -35,34 +35,24 @@ public class KhBbsDaoImpl implements KhBbsDao {
 	public boolean writeBbs(BbsDto bbs) throws Exception {	
 		sqlSession.insert(ns+"writeBbs",bbs);		
 		return true;
-	}
+	}	
 
 	@Override
-	public boolean replyBbsUpdate(BbsDto bbs) throws Exception {		
-		sqlSession.update(ns+"replyBbsUpdate", bbs);
-		return true; 
-	}
-
-	@Override
-	public int replyBbsInsert(BbsDto bbs) throws Exception {
-		return sqlSession.insert(ns+"replyBbsInsert", bbs);
-	}
-
-	@Override
-	public BbsDto getBbs(int seq) throws Exception {		
+	public BbsDto getBbs(int seq) throws Exception {
+		System.out.println("KhBbsDaoImpl getBbs");
 		return sqlSession.selectOne(ns+"getBbs", seq);
 	}
 
 	@Override
-	public void deleteBbs(int seq) throws Exception {
-		sqlSession.update(ns+"deleteBbs", seq);
+	public boolean readCount(int seq) throws Exception {
+		sqlSession.update(ns+"readCount",seq);
+		return true;
 	}
 
 	@Override
 	public List<BbsDto> getBbsPagingList(BbsParam param) throws Exception {
-		List<BbsDto> list = new ArrayList<>();
-		
-		list = sqlSession.selectList(ns+"getBbsPagingList", param);
+		List<BbsDto> list = new ArrayList<BbsDto>();
+		list = sqlSession.selectList(ns+"getBbsPagingList", param);		
 		return list;
 	}
 
@@ -74,9 +64,26 @@ public class KhBbsDaoImpl implements KhBbsDao {
 	}
 
 	@Override
-	public int updateBbs(BbsDto bbs) throws Exception {
-		return sqlSession.update(ns+"updateBbs", bbs); 
+	public boolean replyBbsInsert(BbsDto bbs) throws Exception {
+		sqlSession.insert(ns+"replyBbsInsert", bbs);
+		return true;
 	}
+
+	@Override
+	public boolean replyBbsUpdate(BbsDto bbs) throws Exception {
+		sqlSession.update(ns+"replyBbsUpdate", bbs);
+		return true;
+	}
+
+	@Override
+	public void updateBbs(BbsDto bbs) throws Exception {
+		sqlSession.update(ns+"updateBbs",bbs);
+	}
+	
+	
+
+	
+	
 
 	
 }

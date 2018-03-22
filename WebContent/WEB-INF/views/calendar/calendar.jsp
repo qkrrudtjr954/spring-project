@@ -1,4 +1,5 @@
-﻿<%@page import="kh.com.a.model.myCal"%>
+﻿
+<%@page import="kh.com.a.arrow.myCal"%>
 <%@page import="kh.com.a.model.CalendarDto"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -9,21 +10,25 @@
 
 <style>
 table {
-    border-collapse: collapse;
+    border-collapse: collapse;    
 }
 
 table, td, th {
     border: 1px solid black;
+    font-weight: bold;
+    font-size: 20px;
 }
 .sunday{
 color: red; 
 text-align: left;
 vertical-align: top;
+background-color: #ccccff;
 }
 .satday{
 color: blue; 
 text-align: left;
 vertical-align: top;
+background-color: #ccccff;
 }
 .otherday{
 color: black; 
@@ -57,7 +62,8 @@ public String callist(int year,int month, int day){
 	String s="";
 	s+=String.format("<a href='%s?year=%d&month=%d&day=%d'>", 
 			"callist.do",year,month,day);
-	s+=String.format("%2d",day); //2자리
+	if(day < 10)s+="&nbsp;";
+	s+=String.format("%d",day); //2자리
 	s+="</a>";
 	return s;
 }//
@@ -85,7 +91,8 @@ public String dot3(String msg){
 	}
 	return s;
 }
-public String makeTable(int year,int month, int day, List<CalendarDto> lcdtos){
+public String makeTable(int year,int month, int day,
+		List<CalendarDto> lcdtos){
 	String s="";
 	String dates=(year + "") + two(month + "") + two(day + "");//년월일 8글자 만드는거
 		
@@ -154,7 +161,7 @@ String url=String.format("%s?year=%s&month=%s",
 
 <thead>
 <tr height="100px">
-	<td class="days2" colspan="7"><%=pp%><%=p%><font color="red" style="font-size: 20"><%=String.format("%d년&nbsp;&nbsp;%d월",year,month) %></font><%=n%><%=nn%></td>
+	<td class="days2" colspan="7"><%=pp%><%=p%>&nbsp;<font color="red" style="font-size: 24"><%=String.format("%d년&nbsp;&nbsp;%d월",year,month) %></font>&nbsp;<%=n%><%=nn%></td>
 </tr>
 
 <tr height="100px" >

@@ -25,3 +25,10 @@
 		</div></div>
 	</div>
 </div>
+
+<script>
+function url_logout() {
+	alert("안녕히 가십시오");
+	location.href = "logout.do";
+}
+</script>

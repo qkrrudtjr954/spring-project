@@ -20,12 +20,30 @@ public class KhCalendarServiceImpl implements KhCalendarService {
 		// TODO Auto-generated method stub
 		return khCalendarDao.getCalendarList(fcal);		
 	}
+
+	@Override
+	public List<CalendarDto> getDayList(CalendarDto fcal) throws Exception {
+		// TODO Auto-generated method stub
+		return khCalendarDao.getDayList(fcal);		
+	}
+
+	@Override
+	public boolean writeCalendar(CalendarDto cal) throws Exception {
+		return khCalendarDao.writeCalendar(cal);
+	}
+
+	@Override
+	public CalendarDto getDay(CalendarDto fcal) throws Exception {
+		return khCalendarDao.getDay(fcal);
+	}
+
+	@Override
+	public void delCal(int seq) {
+		khCalendarDao.delCal(seq);		
+	}
+	
+	
+	
+
 	
 }
-
-
-
-
-
-
-

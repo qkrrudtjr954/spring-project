@@ -27,11 +27,9 @@ public class KhMemberDaoImpl implements KhMemberDao {
 	}
 
 	@Override
-	public int getID(MemberDto mem) {
+	public int getID(MemberDto mem) {		 
 		return sqlSession.selectOne(namespace + "getID", mem);
 	}
-	
-	
 
 }
 

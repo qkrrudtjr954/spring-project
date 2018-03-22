@@ -19,7 +19,6 @@
 	<th>아이디</th>
 	<td style="text-align: left">${bbs.id}</td>
 </tr>
-
 <tr>
 	<th>제목</th>
 	<td style="text-align: left">

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%	
+	
 	int totalRecordCount;		// 전체 글수
 	int pageNumber;				// 현재 페이지 번호
 	int pageCountPerScreen;		// 스크린당 페이지수 	
 	int recordCountPerPage;		// 페이지당 글수
+		
 	
 	String st1 = request.getParameter("totalRecordCount");
 	if(st1 == null)	totalRecordCount = 0;

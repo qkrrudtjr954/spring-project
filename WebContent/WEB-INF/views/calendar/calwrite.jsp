@@ -1,5 +1,5 @@
 
-<%@page import="kh.com.a.model.myCal"%>
+<%@page import="kh.com.a.arrow.myCal"%>
 <%@page import="java.util.Calendar"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
